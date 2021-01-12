@@ -1,9 +1,9 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Log in{% endblock %}
+{% block title %}Prijava{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container login">
 
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -20,7 +20,7 @@
 
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <img src="{{ asset('build/img/logo.svg') }}" alt="BerryBox logo" class="login__logo">
                                     </div>
                                     {% if error %}
                                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -30,19 +30,19 @@
                                                value="{{ csrf_token('authenticate') }}"
                                         >
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" name="username" placeholder="Username" value="{{ last_username }}">
+                                            <input type="text" class="form-control form-control-user" name="username" placeholder="Korisničko ime" value="{{ last_username }}">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user" name="password" placeholder="Lozinka">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck" name="_remember_me">
-                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
+                                                <label class="custom-control-label" for="customCheck">Zapamti me</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Prijava
                                         </button>
                                     </form>
                                 </div>

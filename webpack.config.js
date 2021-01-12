@@ -8,6 +8,10 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     .setOutputPath('public/build/')
+    .copyFiles({
+             from: './assets/img',
+             to: 'img/[path][name].[ext]',
+    })
     .setPublicPath('/build')
     .cleanupOutputBeforeBuild()
     .autoProvidejQuery()
