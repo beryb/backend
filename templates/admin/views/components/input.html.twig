@@ -1,0 +1,4 @@
+<div class="form-group {{ type|default('') }}">
+    {{ form_label(field, label) }}
+    {{ form_widget(field, {'attr': {'class': 'form-control', 'placeholder': label}, 'type': type|default('text')}) }}
+</div>

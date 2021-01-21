@@ -14,37 +14,45 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AdvertisementRepository extends ServiceEntityRepository
 {
+    /**
+     * AdvertisementRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Advertisement::class);
     }
 
-    // /**
-    //  * @return Advertisement[] Returns an array of Advertisement objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Advertisement $advertisement
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function create(Advertisement $advertisement)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->_em->persist($advertisement);
+        $this->_em->flush();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Advertisement
+    /**
+     * @param Advertisement $advertisement
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function update(Advertisement $advertisement)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $this->_em->persist($advertisement);
+        $this->_em->flush();
     }
-    */
+
+    /**
+     * @param Advertisement $advertisement
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function remove(Advertisement $advertisement)
+    {
+        $this->_em->remove($advertisement);
+        $this->_em->flush();
+    }
 }

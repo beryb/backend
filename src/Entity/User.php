@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\UserTypeEnum;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -120,5 +121,13 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsAdmin(): ?bool
+    {
+        return in_array(UserTypeEnum::Administrator, $this->roles);
     }
 }

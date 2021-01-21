@@ -1,0 +1,72 @@
+{% extends 'admin/base-granted.html.twig' %}
+
+{% block title %}Sve reklame{% endblock %}
+
+{% block content %}
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid client-list">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Reklame</h1>
+            <a href="{{ path('advertisement_new') }}" class="btn btn-primary btn-icon-split">
+                 <span class="icon text-white-50">
+                     <i class="fas fa-plus"></i>
+                 </span>
+                <span class="text">Dodaj novi</span>
+            </a>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                {% include 'admin/views/components/flashes.html.twig' %}
+
+                {% if advertisements|length > 0 %}
+                    <div class="table-responsive">
+                        <table class="table data-table" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Naslov</th>
+                                <th>Od (datum)</th>
+                                <th>Do (datum)</th>
+                                <th>Tip reklame</th>
+                                <th>Plaćeno</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for advertisement in advertisements %}
+                                <tr>
+                                    <td>{{ advertisement.id }}</td>
+                                    <td>{{ advertisement.title }}</td>
+                                    <td>{{ advertisement.dateFrom|date("d.m.Y.") }}</td>
+                                    <td>{{ advertisement.dateTo|date("d.m.Y.") }}</td>
+                                    <td>{{ advertisement.typeLabel }}</td>
+                                    <td>{{ advertisement.isPayed ? 'Da' : 'Ne' }}</td>
+                                    <td>
+                                        <a href="{{ path('advertisement_edit', {'id': advertisement.id }) }}"
+                                           class="btn btn-warning btn-circle btn-sm">
+                                            <i class="fas fa-pen"></i>
+                                        </a>
+                                        <a href="{{ path('advertisement_delete', {'id': advertisement.id }) }}"
+                                           class="btn btn-danger btn-circle btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-light">
+                        Zapisi nisu dostupni.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+{% endblock %}

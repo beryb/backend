@@ -1,0 +1,18 @@
+<div class="bb-form">
+    {% include 'admin/views/components/flashes.html.twig' %}
+
+    {{ form_start(form, {'method': 'POST'}) }}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.title, 'label': 'Naslov'} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.client, 'label': 'Klijent'} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.dateFrom, 'label': 'Datum od'} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.dateTo, 'label': 'Datum do'} %}
+    {% include 'admin/views/components/checkbox.html.twig' with {'field': form.isPayed, 'label': 'Plaćeno', 'type':'form-check'} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.type, 'label': 'Tip'} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.file, 'label': 'Datoteka', 'type': 'file'} %}
+
+    <button type="submit" class="btn btn-primary btn-user btn-block">
+        Spremi
+    </button>
+
+    {{ form_end(form) }}
+</div>

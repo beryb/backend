@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Enum\UserTypeEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -48,6 +49,7 @@ class AppFixtures extends Fixture
                 'demo'
             )
         );
+        $user->setRoles([UserTypeEnum::Administrator]);
 
         // Saves
         $manager->persist($user);

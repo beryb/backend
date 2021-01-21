@@ -10,14 +10,13 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item {% if(app.request.attributes.get('_route') == 'admin_dashboard') %}active{% endif %}">
+        <a class="nav-link" href="{{ path('admin_dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Upravljačka ploča</span></a>
     </li>
-
     <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
+    <li class="nav-item {% if(app.request.attributes.get('_route') == 'advertisement_list' or app.request.attributes.get('_route') == 'advertisement_new' or app.request.attributes.get('_route') == 'advertisement_edit') %}active{% endif %}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ads"
            aria-expanded="true" aria-controls="collapseRooms">
             <i class="fas fa-fw fa-folder"></i>
@@ -25,26 +24,27 @@
         </a>
         <div id="ads" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="login.html">Svi</a>
-                <a class="collapse-item" href="register.html">Dodaj novi</a>
+                <a class="collapse-item" href="{{ path('advertisement_list') }}">Svi</a>
+                <a class="collapse-item" href="{{ path('advertisement_new') }}">Dodaj novi</a>
             </div>
         </div>
     </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#clients"
-           aria-expanded="true" aria-controls="collapseRooms">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Klijenti</span>
-        </a>
-        <div id="clients" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="login.html">Svi</a>
-                <a class="collapse-item" href="register.html">Dodaj novi</a>
+    {% if app.user.isAdmin %}
+        <li class="nav-item {% if(app.request.attributes.get('_route') == 'client_list' or app.request.attributes.get('_route') == 'client_new' or app.request.attributes.get('_route') == 'client_edit' ) %}active{% endif %}">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#clients"
+               aria-expanded="true" aria-controls="collapseRooms">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Klijenti</span>
+            </a>
+            <div id="clients" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ path('client_list') }}">Svi</a>
+                    <a class="collapse-item" href="{{ path('client_new') }}">Dodaj novi</a>
+                </div>
             </div>
-        </div>
-    </li>
+        </li>
+    {% endif %}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

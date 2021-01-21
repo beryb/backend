@@ -22,4 +22,37 @@ class ClientRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Client::class);
     }
+
+    /**
+     * @param Client $client
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function create(Client $client)
+    {
+        $this->_em->persist($client);
+        $this->_em->flush();
+    }
+
+    /**
+     * @param Client $client
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function update(Client $client)
+    {
+        $this->_em->persist($client);
+        $this->_em->flush();
+    }
+
+    /**
+     * @param Client $client
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function remove(Client $client)
+    {
+        $this->_em->remove($client);
+        $this->_em->flush();
+    }
 }

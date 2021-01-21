@@ -1,0 +1,20 @@
+<div class="bb-form">
+    {% set passwordInputType = 'password' %}
+    {% if isEdit == true %}
+        {% set passwordInputType = 'hidden' %}
+    {% endif %}
+
+    {% include 'admin/views/components/flashes.html.twig' %}
+
+    {{ form_start(form, {'method': 'POST'}) }}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.firstname, 'label': 'Ime'} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.lastname, 'label': 'Prezime'} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.code, 'label': 'Aktivacijski kod'} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.user.username, 'label': 'Korisničko ime'} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.user.password.first, 'label': 'Lozinka', 'type': passwordInputType} %}
+    {% include 'admin/views/components/input.html.twig' with {'field': form.user.password.second, 'label': 'Ponovi lozinku', 'type': passwordInputType} %}
+    <button type="submit" class="btn btn-primary btn-user btn-block">
+        Spremi
+    </button>
+    {{ form_end(form) }}
+</div>
