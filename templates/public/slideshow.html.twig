@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>BerryBox | SlideShow</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('web') }}
+        {% endblock %}
+    </head>
+    <body>
+
+    <div class="js-slideshow">
+        {% set increment = 1 %}
+        {% for advertisement in advertisements %}
+            {% set shownClass = '' %}
+            {% if increment == 1 %}
+                {% set shownClass = ' shown' %}
+            {% endif %}
+        <div class="js-slideshow-item{{ shownClass }}">
+            {% if advertisement.type == constant('App\\Enum\\AdvertisementTypeEnum::Video') %}
+                <video autoplay muted id="{{ advertisement.id }}" data-type="{{ advertisement.type }}">
+                    <source src="{{ asset('uploads/advertisements/'~advertisement.file) }}" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+            {% endif %}
+            {% if advertisement.type == constant('App\\Enum\\AdvertisementTypeEnum::Basic') %}
+                <img src="{{ asset('uploads/advertisements/'~advertisement.file) }}" id="{{ advertisement.id }}" data-type="{{ advertisement.type }}">
+            {% endif %}
+        </div>
+            {% set increment = increment + 1 %}
+        {% endfor %}
+    </div>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('web') }}
+    {% endblock %}
+
+    </body>
+</html>
