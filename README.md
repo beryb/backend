@@ -5,8 +5,8 @@ Symfony app for ads management.
 
 ## Built on
 - Symfony 5.2.1
-- PHP 7.1.25 - fpm
-- Node v8.9.0
+- PHP 7.4
+- Node v10.16.3
 
 ## Development
 
