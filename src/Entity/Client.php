@@ -121,18 +121,11 @@ class Client
     /**
      * @return User|null
      */
-    /**
-     * @return User|null
-     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    /**
-     * @param User|null $user
-     * @return $this
-     */
     /**
      * @param User|null $user
      * @return $this

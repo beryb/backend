@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Advertisement;
+use App\Entity\User;
 use App\Form\Type\AdvertisementType;
 use App\Service\AdvertisementService;
+use App\Service\ClientService;
 use App\Service\FileUploadService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -30,14 +32,21 @@ class AdvertisementController extends AbstractController
     private $fileUploadService;
 
     /**
+     * @var ClientService
+     */
+    private $clientService;
+
+    /**
      * AdvertisementController constructor.
      * @param AdvertisementService $advertisementService
      * @param FileUploadService $fileUploadService
+     * @param ClientService $clientService
      */
-    public function __construct(AdvertisementService $advertisementService, FileUploadService $fileUploadService)
+    public function __construct(AdvertisementService $advertisementService, FileUploadService $fileUploadService, ClientService $clientService)
     {
         $this->advertisementService = $advertisementService;
         $this->fileUploadService = $fileUploadService;
+        $this->clientService = $clientService;
     }
 
     /**
@@ -49,8 +58,19 @@ class AdvertisementController extends AbstractController
      */
     public function list(): Response
     {
-        // Gets advertisements
-        $advertisements = $this->advertisementService->getAll();
+        /** @var User $user */
+        $user = $this->getUser();
+
+        // If user is admin - get all
+        if ($user->getIsAdmin()) {
+            // Gets advertisements
+            $advertisements = $this->advertisementService->getAll();
+        } else {
+            // Gets client
+            $client = $this->clientService->getByUser($user);
+            // Gets advertisements
+            $advertisements = $client->getAdvertisements();
+        }
 
         // Render template
         return $this->render('admin/views/advertisement/list.html.twig', [

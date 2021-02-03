@@ -3,7 +3,9 @@
 namespace App\Service;
 
 use App\Entity\Client;
+use App\Entity\User;
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\Collection;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -113,5 +115,23 @@ class ClientService
     public function getByCode(string $code): Client
     {
         return $this->clientRepository->findOneBy(['code' => $code]);
+    }
+
+    /**
+     * @param User $user
+     * @return Client
+     */
+    public function getByUser(User $user): Client
+    {
+        return $this->clientRepository->findOneBy(['user' => $user]);
+    }
+
+    /**
+     * @param User $user
+     * @return Client[]
+     */
+    public function getAllByUser(User $user)
+    {
+        return $this->clientRepository->findBy(['user' => $user]);
     }
 }
